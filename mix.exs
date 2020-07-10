@@ -1,9 +1,9 @@
-defmodule Speak.MixProject do
+defmodule Bark.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :speak,
+      app: :bark,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,

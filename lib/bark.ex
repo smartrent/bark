@@ -1,4 +1,4 @@
-defmodule Speak do
+defmodule Bark do
   require Logger
 
   # Logs a list of kv pairs
