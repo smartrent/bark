@@ -1,4 +1,4 @@
-# Log
+# Speak
 
 **TODO: Add description**
 
@@ -10,7 +10,7 @@ by adding `log` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:log, "~> 0.1.0"}
+    {:speak, "~> 0.1.0"}
   ]
 end
 ```
