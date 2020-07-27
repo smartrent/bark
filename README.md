@@ -1,22 +1,11 @@
 # Bark
 ![](bark.png)
 
-_Bark_ is an Elixir package that provides a wrapper around `Logger`. Add more of a description in the morning.
+_Bark_ is an Elixir package that provides a wrapper around `Logger`.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `bark` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:bark, "~> 0.1.0", organization: "smartrent"}
-  ]
-end
-```
-
-**OR**
+Bark can be installed by adding `bark` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
