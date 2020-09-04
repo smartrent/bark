@@ -17,15 +17,21 @@ defmodule Bark do
   defp parse_message(env, opts) when is_list(opts) do
     env
     |> add_caller_context(opts)
-    |> Enum.map(fn {key, value} ->
-        "#{Atom.to_string(key)}=#{log_value(value)}"
-      end)
-    |> Enum.join(" ")
+    |> to_log_string()
   end
 
   defp parse_message(env, opts) when is_binary(opts) do
-    %{message: opts}
-    |> add_caller_context(opts)
+    env
+    |> add_caller_context(message: opts)
+    |> to_log_string()
+  end
+
+  defp to_log_string(keywords) do
+    keywords
+    |> Enum.map(fn {key, value} ->
+      "#{Atom.to_string(key)}=#{log_value(value)}"
+    end)
+    |> Enum.join(" ")
   end
 
   defp add_caller_context(env, opts) when is_list(opts) do
@@ -35,14 +41,17 @@ defmodule Bark do
     |> Keyword.put_new(:module, module(env))
   end
 
-  defp module(%{:module => module} = _env ) when is_atom(module) do
+  defp module(%{:module => module} = _env) when is_atom(module) do
     module
     |> Atom.to_string()
     |> String.replace("Elixir.", "")
   end
+
   defp module(_), do: "None"
 
-  defp function_name_arity(%{:function => {function_name, arity}}), do: "#{function_name}/#{arity}"
+  defp function_name_arity(%{:function => {function_name, arity}}),
+    do: "#{function_name}/#{arity}"
+
   defp function_name_arity(_), do: "None"
 
   defp line_number(%{line: line}), do: line
@@ -51,7 +60,7 @@ defmodule Bark do
   # Quote string if it contains a space
   defp quote_if_spaces(value) when is_binary(value) do
     if String.contains?(value, " ") do
-      value_with_escaped_quotes = String.replace(value, "\"", "\\\"" )
+      value_with_escaped_quotes = String.replace(value, "\"", "\\\"")
       "\"#{value_with_escaped_quotes}\""
     else
       value

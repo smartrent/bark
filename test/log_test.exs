@@ -3,26 +3,62 @@ defmodule LogTest do
   doctest Bark
 
   describe "info" do
-    test "greets the world" do
-      assert Bark.info(__ENV__, speak: "woof", number: 1, map: %{something: "neet"}, tuple: {:tuple, :ok} ) == :ok
+    test "can log a list of keywords" do
+      assert Bark.info(__ENV__,
+               speak: "woof",
+               number: 1,
+               map: %{something: "neet"},
+               tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log string" do
+      assert Bark.info(__ENV__, "woof") == :ok
     end
   end
 
   describe "warn" do
-    test "greets the world" do
-      assert Bark.warn(__ENV__, speak: "woof", number: 1, map: %{something: "neet"}, tuple: {:tuple, :ok} ) == :ok
+    test "can log a list of keywords" do
+      assert Bark.warn(__ENV__,
+               speak: "woof",
+               number: 1,
+               map: %{something: "neet"},
+               tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log string" do
+      assert Bark.warn(__ENV__, "woof") == :ok
     end
   end
 
   describe "error" do
-    test "greets the world" do
-      assert Bark.error(__ENV__, speak: "woof", number: 1, map: %{something: "neet"}, tuple: {:tuple, :ok} ) == :ok
+    test "can log a list of keywords" do
+      assert Bark.error(__ENV__,
+               speak: "woof",
+               number: 1,
+               map: %{something: "neet"},
+               tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log string" do
+      assert Bark.error(__ENV__, "woof") == :ok
     end
   end
 
   describe "debug" do
-    test "greets the world" do
-      assert Bark.debug(__ENV__, speak: "woof", number: 1, map: %{something: "neet"}, tuple: {:tuple, :ok} ) == :ok
+    test "can log a list of keywords" do
+      assert Bark.debug(__ENV__,
+               speak: "woof",
+               number: 1,
+               map: %{something: "neet"},
+               tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log string" do
+      assert Bark.debug(__ENV__, "woof") == :ok
     end
   end
 end
