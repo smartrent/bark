@@ -2,27 +2,25 @@ defmodule Bark do
   require Logger
 
   # Logs a list of kv pairs
-  @spec warn(any(), Keyword.t()) :: any()
+  @spec warn(any(), Keyword.t() | binary()) :: any()
   def warn(env, opts), do: Logger.warn(parse_message(env, opts))
 
-  @spec info(any(), Keyword.t()) :: any()
+  @spec info(any(), Keyword.t() | binary()) :: any()
   def info(env, opts), do: Logger.info(parse_message(env, opts))
 
-  @spec error(any(), Keyword.t()) :: any()
+  @spec error(any(), Keyword.t() | binary()) :: any()
   def error(env, opts), do: Logger.error(parse_message(env, opts))
 
-  @spec debug(any(), Keyword.t()) :: any()
+  @spec debug(any(), Keyword.t() | binary()) :: any()
   def debug(env, opts), do: Logger.debug(parse_message(env, opts))
 
   defp parse_message(env, opts) when is_list(opts) do
     env
     |> add_caller_context(opts)
-    |> Enum.reduce(
-      "",
-      fn {k, v}, acc ->
-        "#{acc} #{Atom.to_string(k)}=#{log_value(v)}"
-      end
-    )
+    |> Enum.map(fn {key, value} ->
+        "#{Atom.to_string(key)}=#{log_value(value)}"
+      end)
+    |> Enum.join(" ")
   end
 
   defp parse_message(env, opts) when is_binary(opts) do
