@@ -11,10 +11,6 @@ defmodule LogTest do
                tuple: {:tuple, :ok}
              ) == :ok
     end
-
-    test "can log string" do
-      assert Bark.info(__ENV__, "woof") == :ok
-    end
   end
 
   describe "warn" do
@@ -25,10 +21,6 @@ defmodule LogTest do
                map: %{something: "neet"},
                tuple: {:tuple, :ok}
              ) == :ok
-    end
-
-    test "can log string" do
-      assert Bark.warn(__ENV__, "woof") == :ok
     end
   end
 
@@ -41,10 +33,6 @@ defmodule LogTest do
                tuple: {:tuple, :ok}
              ) == :ok
     end
-
-    test "can log string" do
-      assert Bark.error(__ENV__, "woof") == :ok
-    end
   end
 
   describe "debug" do
@@ -55,10 +43,6 @@ defmodule LogTest do
                map: %{something: "neet"},
                tuple: {:tuple, :ok}
              ) == :ok
-    end
-
-    test "can log string" do
-      assert Bark.debug(__ENV__, "woof") == :ok
     end
   end
 end

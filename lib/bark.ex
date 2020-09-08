@@ -2,31 +2,25 @@ defmodule Bark do
   require Logger
 
   # Logs a list of kv pairs
-  @spec warn(any(), Keyword.t() | binary()) :: any()
+  @spec warn(any(), Keyword.t()) :: any()
   def warn(env, opts), do: Logger.warn(parse_message(env, opts))
 
-  @spec info(any(), Keyword.t() | binary()) :: any()
+  @spec info(any(), Keyword.t()) :: any()
   def info(env, opts), do: Logger.info(parse_message(env, opts))
 
-  @spec error(any(), Keyword.t() | binary()) :: any()
+  @spec error(any(), Keyword.t()) :: any()
   def error(env, opts), do: Logger.error(parse_message(env, opts))
 
-  @spec debug(any(), Keyword.t() | binary()) :: any()
+  @spec debug(any(), Keyword.t()) :: any()
   def debug(env, opts), do: Logger.debug(parse_message(env, opts))
 
   defp parse_message(env, opts) when is_list(opts) do
     env
     |> add_caller_context(opts)
-    |> to_log_string()
+    |> to_log_formatted_string()
   end
 
-  defp parse_message(env, opts) when is_binary(opts) do
-    env
-    |> add_caller_context(message: opts)
-    |> to_log_string()
-  end
-
-  defp to_log_string(keywords) do
+  defp to_log_formatted_string(keywords) do
     keywords
     |> Enum.map(fn {key, value} ->
       "#{Atom.to_string(key)}=#{log_value(value)}"
