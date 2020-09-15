@@ -54,7 +54,7 @@ defmodule Bark do
   # Quote string if it contains a space, and if there are quotes within in the string replace them with 🩹
   defp quote_if_spaces(value) when is_binary(value) do
     if String.contains?(value, " ") do
-      value_with_escaped_quotes = String.replace(value, "\"", "🩹")
+      value_with_escaped_quotes = String.replace(value, "\"", "″")
       "\"#{value_with_escaped_quotes}\""
     else
       value
