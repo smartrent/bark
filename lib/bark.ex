@@ -51,7 +51,8 @@ defmodule Bark do
   defp line_number(%{line: line}), do: line
   defp line_number(not_line), do: inspect(not_line)
 
-  # Quote string if it contains a space, and if there are quotes within in the string replace them with 🩹
+  # Quote string if it contains a space, and if there are quotes within in the string replace them with something that
+  # doesn't break the parser.
   defp quote_if_spaces(value) when is_binary(value) do
     if String.contains?(value, " ") do
       value_with_escaped_quotes = String.replace(value, "\"", "″")
