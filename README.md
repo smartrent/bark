@@ -10,7 +10,7 @@ Bark can be installed by adding `bark` to your list of dependencies in `mix.exs`
 ```elixir
 def deps do
   [
-    {:bark, github: "smartrent/bark", branch: "master"}
+    {:bark, github: "smartrent/bark", branch: "main"}
   ]
 end
 ```
