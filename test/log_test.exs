@@ -11,6 +11,18 @@ defmodule LogTest do
                tuple: {:tuple, :ok}
              ) == :ok
     end
+
+    test "can log a list of keywords as strings" do
+      assert Bark.warn(
+               __ENV__,
+               [
+                 {"speak", "woof"},
+                 {"number", 1},
+                 {"map", %{"something" => "neet"}},
+                 {"tuple", {:tuple, :ok}}
+               ]
+             ) == :ok
+    end
   end
 
   describe "warn" do
@@ -20,6 +32,18 @@ defmodule LogTest do
                number: 1,
                map: %{something: "neet"},
                tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log a list of keywords as strings" do
+      assert Bark.warn(
+               __ENV__,
+               [
+                 {"speak", "woof"},
+                 {"number", 1},
+                 {"map", %{"something" => "neet"}},
+                 {"tuple", {:tuple, :ok}}
+               ]
              ) == :ok
     end
   end
@@ -33,6 +57,18 @@ defmodule LogTest do
                tuple: {:tuple, :ok}
              ) == :ok
     end
+
+    test "can log a list of keywords as strings" do
+      assert Bark.warn(
+               __ENV__,
+               [
+                 {"speak", "woof"},
+                 {"number", 1},
+                 {"map", %{"something" => "neet"}},
+                 {"tuple", {:tuple, :ok}}
+               ]
+             ) == :ok
+    end
   end
 
   describe "debug" do
@@ -42,6 +78,18 @@ defmodule LogTest do
                number: 1,
                map: %{something: "neet"},
                tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log a list of keywords as strings" do
+      assert Bark.warn(
+               __ENV__,
+               [
+                 {"speak", "woof"},
+                 {"number", 1},
+                 {"map", %{"something" => "neet"}},
+                 {"tuple", {:tuple, :ok}}
+               ]
              ) == :ok
     end
   end

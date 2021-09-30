@@ -23,7 +23,7 @@ defmodule Bark do
   defp to_log_formatted_string(keywords) do
     keywords
     |> Enum.map(fn {key, value} ->
-      "#{Atom.to_string(key)}=#{log_value(value)}"
+      "#{log_value(key)}=#{log_value(value)}"
     end)
     |> Enum.join(" ")
   end
