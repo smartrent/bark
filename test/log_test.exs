@@ -13,7 +13,7 @@ defmodule LogTest do
     end
 
     test "can log a list of keywords as strings" do
-      assert Bark.warn(
+      assert Bark.info(
                __ENV__,
                [
                  {"speak", "woof"},
@@ -59,7 +59,7 @@ defmodule LogTest do
     end
 
     test "can log a list of keywords as strings" do
-      assert Bark.warn(
+      assert Bark.error(
                __ENV__,
                [
                  {"speak", "woof"},
@@ -82,7 +82,7 @@ defmodule LogTest do
     end
 
     test "can log a list of keywords as strings" do
-      assert Bark.warn(
+      assert Bark.debug(
                __ENV__,
                [
                  {"speak", "woof"},
