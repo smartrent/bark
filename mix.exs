@@ -4,9 +4,10 @@ defmodule Bark.MixProject do
   def project do
     [
       app: :bark,
-      version: "1.1.1",
+      version: "1.1.2",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
+      package: package(),
       deps: deps()
     ]
   end
@@ -15,6 +16,14 @@ defmodule Bark.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  def package do
+    [
+      organization: "smartrent",
+      licenses: [],
+      links: []
     ]
   end
 
