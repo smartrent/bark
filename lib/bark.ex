@@ -3,7 +3,7 @@ defmodule Bark do
 
   # Logs a list of kv pairs
   @spec warn(any(), Keyword.t()) :: any()
-  def warn(env, opts), do: Logger.warn(parse_message(env, opts))
+  def warn(env, opts), do: Logger.warning(parse_message(env, opts))
 
   @spec info(any(), Keyword.t()) :: any()
   def info(env, opts), do: Logger.info(parse_message(env, opts))
