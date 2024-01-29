@@ -8,6 +8,9 @@ defmodule Bark do
   @spec info(any(), Keyword.t()) :: any()
   def info(env, opts), do: Logger.info(parse_message(env, opts))
 
+  @spec audit(any(), Keyword.t()) :: any()
+  def audit(env, opts), do: Logger.notice(parse_message(env, opts))
+
   @spec error(any(), Keyword.t()) :: any()
   def error(env, opts), do: Logger.error(parse_message(env, opts))
 
