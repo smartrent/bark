@@ -25,6 +25,29 @@ defmodule LogTest do
     end
   end
 
+  describe "audit" do
+    test "can log a list of keywords" do
+      assert Bark.audit(__ENV__,
+               speak: "woof",
+               number: 1,
+               map: %{something: "neet"},
+               tuple: {:tuple, :ok}
+             ) == :ok
+    end
+
+    test "can log a list of keywords as strings" do
+      assert Bark.audit(
+               __ENV__,
+               [
+                 {"speak", "woof"},
+                 {"number", 1},
+                 {"map", %{"something" => "neet"}},
+                 {"tuple", {:tuple, :ok}}
+               ]
+             ) == :ok
+    end
+  end
+
   describe "warn" do
     test "can log a list of keywords" do
       assert Bark.warn(__ENV__,
