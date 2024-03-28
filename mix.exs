@@ -4,7 +4,7 @@ defmodule Bark.MixProject do
   def project do
     [
       app: :bark,
-      version: "1.2.0",
+      version: "1.2.1",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       package: package(),
