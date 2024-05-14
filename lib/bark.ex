@@ -1,7 +1,10 @@
 defmodule Bark do
+  @moduledoc """
+  `Bark` is a wrapper around `Logger` that adds context and standard formatting to your logs.
+  """
+
   require Logger
 
-  # Logs a list of kv pairs
   @spec warn(Macro.Env.t(), Keyword.t()) :: :ok
   def warn(env, opts), do: Logger.warning(parse_message(env, opts))
 
