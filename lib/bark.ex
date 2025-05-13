@@ -20,20 +20,18 @@ defmodule Bark do
   @spec debug(Macro.Env.t(), Keyword.t()) :: :ok
   def debug(env, opts), do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
-  defp validate_ansi_color(color) when is_atom(color) do
-    valid_colors = [
-      :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white,
-      :light_black, :light_red, :light_green, :light_yellow, :light_blue,
-      :light_magenta, :light_cyan, :light_white,
-      :black_background, :red_background, :green_background, :yellow_background,
-      :blue_background, :magenta_background, :cyan_background, :white_background,
-      :light_black_background, :light_red_background, :light_green_background,
-      :light_yellow_background, :light_blue_background, :light_magenta_background,
-      :light_cyan_background, :light_white_background
-    ]
+  @valid_colors [
+    :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white,
+    :light_black, :light_red, :light_green, :light_yellow, :light_blue,
+    :light_magenta, :light_cyan, :light_white,
+    :black_background, :red_background, :green_background, :yellow_background,
+    :blue_background, :magenta_background, :cyan_background, :white_background,
+    :light_black_background, :light_red_background, :light_green_background,
+    :light_yellow_background, :light_blue_background, :light_magenta_background,
+    :light_cyan_background, :light_white_background
+  ]
 
-    if color in valid_colors, do: color, else: nil
-  end
+  defp validate_ansi_color(color) when color in @valid_colors, do: color
   defp validate_ansi_color(_), do: nil
 
   defp parse_message(env, opts) when is_list(opts) do
