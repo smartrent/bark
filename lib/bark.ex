@@ -6,29 +6,60 @@ defmodule Bark do
   require Logger
 
   @spec warn(Macro.Env.t(), Keyword.t()) :: :ok
-  def warn(env, opts), do: Logger.warning(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def warn(env, opts),
+    do:
+      Logger.warning(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @spec info(Macro.Env.t(), Keyword.t()) :: :ok
-  def info(env, opts), do: Logger.info(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def info(env, opts),
+    do: Logger.info(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @spec audit(Macro.Env.t(), Keyword.t()) :: :ok
-  def audit(env, opts), do: Logger.notice(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def audit(env, opts),
+    do:
+      Logger.notice(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @spec error(Macro.Env.t(), Keyword.t()) :: :ok
-  def error(env, opts), do: Logger.error(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def error(env, opts),
+    do: Logger.error(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @spec debug(Macro.Env.t(), Keyword.t()) :: :ok
-  def debug(env, opts), do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def debug(env, opts),
+    do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @valid_colors [
-    :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white,
-    :light_black, :light_red, :light_green, :light_yellow, :light_blue,
-    :light_magenta, :light_cyan, :light_white,
-    :black_background, :red_background, :green_background, :yellow_background,
-    :blue_background, :magenta_background, :cyan_background, :white_background,
-    :light_black_background, :light_red_background, :light_green_background,
-    :light_yellow_background, :light_blue_background, :light_magenta_background,
-    :light_cyan_background, :light_white_background
+    :black,
+    :red,
+    :green,
+    :yellow,
+    :blue,
+    :magenta,
+    :cyan,
+    :white,
+    :light_black,
+    :light_red,
+    :light_green,
+    :light_yellow,
+    :light_blue,
+    :light_magenta,
+    :light_cyan,
+    :light_white,
+    :black_background,
+    :red_background,
+    :green_background,
+    :yellow_background,
+    :blue_background,
+    :magenta_background,
+    :cyan_background,
+    :white_background,
+    :light_black_background,
+    :light_red_background,
+    :light_green_background,
+    :light_yellow_background,
+    :light_blue_background,
+    :light_magenta_background,
+    :light_cyan_background,
+    :light_white_background
   ]
 
   defp validate_ansi_color(color) when color in @valid_colors, do: color
