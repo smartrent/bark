@@ -9,6 +9,7 @@ defmodule Bark do
   defmacro warn(opts \\ []) do
     quote do
       require Logger
+
       Logger.warning(
         Bark.parse_message(__ENV__, unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -19,6 +20,7 @@ defmodule Bark do
   defmacro info(opts \\ []) do
     quote do
       require Logger
+
       Logger.info(
         Bark.parse_message(__ENV__, unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -29,6 +31,7 @@ defmodule Bark do
   defmacro audit(opts \\ []) do
     quote do
       require Logger
+
       Logger.notice(
         Bark.parse_message(__ENV__, unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -39,6 +42,7 @@ defmodule Bark do
   defmacro error(opts \\ []) do
     quote do
       require Logger
+
       Logger.error(
         Bark.parse_message(__ENV__, unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -49,6 +53,7 @@ defmodule Bark do
   defmacro debug(opts \\ []) do
     quote do
       require Logger
+
       Logger.debug(
         Bark.parse_message(__ENV__, unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -61,6 +66,7 @@ defmodule Bark do
   defmacro warn(env, opts) do
     quote do
       require Logger
+
       Logger.warning(
         Bark.parse_message(unquote(env), unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -72,6 +78,7 @@ defmodule Bark do
   defmacro info(env, opts) do
     quote do
       require Logger
+
       Logger.info(
         Bark.parse_message(unquote(env), unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -83,6 +90,7 @@ defmodule Bark do
   defmacro audit(env, opts) do
     quote do
       require Logger
+
       Logger.notice(
         Bark.parse_message(unquote(env), unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -94,6 +102,7 @@ defmodule Bark do
   defmacro error(env, opts) do
     quote do
       require Logger
+
       Logger.error(
         Bark.parse_message(unquote(env), unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -105,6 +114,7 @@ defmodule Bark do
   defmacro debug(env, opts) do
     quote do
       require Logger
+
       Logger.debug(
         Bark.parse_message(unquote(env), unquote(opts)),
         ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
@@ -113,14 +123,38 @@ defmodule Bark do
   end
 
   @valid_colors [
-    :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white,
-    :light_black, :light_red, :light_green, :light_yellow, :light_blue,
-    :light_magenta, :light_cyan, :light_white,
-    :black_background, :red_background, :green_background, :yellow_background,
-    :blue_background, :magenta_background, :cyan_background, :white_background,
-    :light_black_background, :light_red_background, :light_green_background,
-    :light_yellow_background, :light_blue_background, :light_magenta_background,
-    :light_cyan_background, :light_white_background
+    :black,
+    :red,
+    :green,
+    :yellow,
+    :blue,
+    :magenta,
+    :cyan,
+    :white,
+    :light_black,
+    :light_red,
+    :light_green,
+    :light_yellow,
+    :light_blue,
+    :light_magenta,
+    :light_cyan,
+    :light_white,
+    :black_background,
+    :red_background,
+    :green_background,
+    :yellow_background,
+    :blue_background,
+    :magenta_background,
+    :cyan_background,
+    :white_background,
+    :light_black_background,
+    :light_red_background,
+    :light_green_background,
+    :light_yellow_background,
+    :light_blue_background,
+    :light_magenta_background,
+    :light_cyan_background,
+    :light_white_background
   ]
 
   def validate_ansi_color(color) when color in @valid_colors, do: color
