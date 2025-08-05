@@ -5,36 +5,125 @@ defmodule Bark do
 
   require Logger
 
+  # New style macros (recommended)
+  defmacro warn(opts \\ []) do
+    quote do
+      require Logger
+
+      Logger.warning(
+        Bark.parse_message(__ENV__, unquote(opts)),
+        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
+      )
+    end
+  end
+
+  defmacro info(opts \\ []) do
+    quote do
+      require Logger
+
+      Logger.info(
+        Bark.parse_message(__ENV__, unquote(opts)),
+        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
+      )
+    end
+  end
+
+  defmacro audit(opts \\ []) do
+    quote do
+      require Logger
+
+      Logger.notice(
+        Bark.parse_message(__ENV__, unquote(opts)),
+        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
+      )
+    end
+  end
+
+  defmacro error(opts \\ []) do
+    quote do
+      require Logger
+
+      Logger.error(
+        Bark.parse_message(__ENV__, unquote(opts)),
+        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
+      )
+    end
+  end
+
+  defmacro debug(opts \\ []) do
+    quote do
+      require Logger
+
+      Logger.debug(
+        Bark.parse_message(__ENV__, unquote(opts)),
+        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
+      )
+    end
+  end
+
+  @deprecated "Use Bark.warn(opts) instead of Bark.warn(__ENV__, opts)"
   @spec warn(Macro.Env.t(), Keyword.t()) :: :ok
-  def warn(env, opts), do: Logger.warning(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def warn(env, opts),
+    do:
+      Logger.warning(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
+  @deprecated "Use Bark.info(opts) instead of Bark.info(__ENV__, opts)"
   @spec info(Macro.Env.t(), Keyword.t()) :: :ok
-  def info(env, opts), do: Logger.info(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  def info(env, opts),
+    do: Logger.info(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
-  @spec audit(Macro.Env.t(), Keyword.t()) :: :ok
-  def audit(env, opts), do: Logger.notice(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  @deprecated "Use Bark.audit(opts) instead of Bark.audit(__ENV__, opts)"
+  def audit(env, opts),
+    do:
+      Logger.notice(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
-  @spec error(Macro.Env.t(), Keyword.t()) :: :ok
-  def error(env, opts), do: Logger.error(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  @deprecated "Use Bark.error(opts) instead of Bark.error(__ENV__, opts)"
+  def error(env, opts),
+    do: Logger.error(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
-  @spec debug(Macro.Env.t(), Keyword.t()) :: :ok
-  def debug(env, opts), do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
+  @deprecated "Use Bark.debug(opts) instead of Bark.debug(__ENV__, opts)"
+  def debug(env, opts),
+    do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @valid_colors [
-    :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white,
-    :light_black, :light_red, :light_green, :light_yellow, :light_blue,
-    :light_magenta, :light_cyan, :light_white,
-    :black_background, :red_background, :green_background, :yellow_background,
-    :blue_background, :magenta_background, :cyan_background, :white_background,
-    :light_black_background, :light_red_background, :light_green_background,
-    :light_yellow_background, :light_blue_background, :light_magenta_background,
-    :light_cyan_background, :light_white_background
+    :black,
+    :red,
+    :green,
+    :yellow,
+    :blue,
+    :magenta,
+    :cyan,
+    :white,
+    :light_black,
+    :light_red,
+    :light_green,
+    :light_yellow,
+    :light_blue,
+    :light_magenta,
+    :light_cyan,
+    :light_white,
+    :black_background,
+    :red_background,
+    :green_background,
+    :yellow_background,
+    :blue_background,
+    :magenta_background,
+    :cyan_background,
+    :white_background,
+    :light_black_background,
+    :light_red_background,
+    :light_green_background,
+    :light_yellow_background,
+    :light_blue_background,
+    :light_magenta_background,
+    :light_cyan_background,
+    :light_white_background
   ]
 
-  defp validate_ansi_color(color) when color in @valid_colors, do: color
-  defp validate_ansi_color(_), do: nil
+  def validate_ansi_color(color) when color in @valid_colors, do: color
+  def validate_ansi_color(_), do: nil
 
-  defp parse_message(env, opts) when is_list(opts) do
+  def parse_message(env, opts) when is_list(opts) do
     opts = Keyword.drop(opts, [:ansi_color])
 
     env
