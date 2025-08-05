@@ -61,66 +61,29 @@ defmodule Bark do
     end
   end
 
-  # Deprecated old style macros (backward compatibility)
   @deprecated "Use Bark.warn(opts) instead of Bark.warn(__ENV__, opts)"
-  defmacro warn(env, opts) do
-    quote do
-      require Logger
-
-      Logger.warning(
-        Bark.parse_message(unquote(env), unquote(opts)),
-        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
-      )
-    end
-  end
+  @spec warn(Macro.Env.t(), Keyword.t()) :: :ok
+  def warn(env, opts),
+    do:
+      Logger.warning(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @deprecated "Use Bark.info(opts) instead of Bark.info(__ENV__, opts)"
-  defmacro info(env, opts) do
-    quote do
-      require Logger
-
-      Logger.info(
-        Bark.parse_message(unquote(env), unquote(opts)),
-        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
-      )
-    end
-  end
+  @spec info(Macro.Env.t(), Keyword.t()) :: :ok
+  def info(env, opts),
+    do: Logger.info(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @deprecated "Use Bark.audit(opts) instead of Bark.audit(__ENV__, opts)"
-  defmacro audit(env, opts) do
-    quote do
-      require Logger
-
-      Logger.notice(
-        Bark.parse_message(unquote(env), unquote(opts)),
-        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
-      )
-    end
-  end
+  def audit(env, opts),
+    do:
+      Logger.notice(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @deprecated "Use Bark.error(opts) instead of Bark.error(__ENV__, opts)"
-  defmacro error(env, opts) do
-    quote do
-      require Logger
-
-      Logger.error(
-        Bark.parse_message(unquote(env), unquote(opts)),
-        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
-      )
-    end
-  end
+  def error(env, opts),
+    do: Logger.error(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @deprecated "Use Bark.debug(opts) instead of Bark.debug(__ENV__, opts)"
-  defmacro debug(env, opts) do
-    quote do
-      require Logger
-
-      Logger.debug(
-        Bark.parse_message(unquote(env), unquote(opts)),
-        ansi_color: Bark.validate_ansi_color(unquote(opts)[:ansi_color])
-      )
-    end
-  end
+  def debug(env, opts),
+    do: Logger.debug(parse_message(env, opts), ansi_color: validate_ansi_color(opts[:ansi_color]))
 
   @valid_colors [
     :black,
