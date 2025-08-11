@@ -1,9 +1,11 @@
 defmodule Bark.LogFormatter do
   @moduledoc """
-
   To use in an application, add this in `config/`
 
   ```elixir
+  config :logger, :console, format: "..."
+
+  # Pulls the format string from existing console logger, or uses a default
   config :logger, :default_formatter,
       format: {Bark.LogFormatter, :format},
   ```
